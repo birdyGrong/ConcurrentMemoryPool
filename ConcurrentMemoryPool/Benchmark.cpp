@@ -43,7 +43,9 @@ void BenchmarkMalloc(size_t ntimes, size_t nworks, size_t rounds)
 		t.join();
 	}
 
-	cout << "%u个线程并发执行" << nworks << "轮次，每轮次malloc" << rounds << "次,malloc rounds" << ntimes << "次 : 花费： " << malloc_costtime << endl;
+	cout << nworks << "个线程并发执行" << rounds << "轮次，每轮次malloc " << ntimes << "次, 花费： " << malloc_costtime << "ms" << endl;
+	cout << nworks << "个线程并发执行" << rounds << "轮次，每轮次free " << ntimes << "次, 花费： " << free_costtime << "ms" << endl;
+	cout << nworks << "个线程并发执行" << rounds << "轮次，每轮次malloc和free " << ntimes << "次, 花费： " << malloc_costtime + free_costtime << "ms" << endl;
 
 	cout << "%u个线程并发执行" << nworks << "轮次，每轮次free" << rounds << "次,malloc rounds" << ntimes << "次 : 花费： " << free_costtime << endl;
 
@@ -92,7 +94,9 @@ void BenchmarkConcurrentMalloc(size_t ntimes, size_t nworks, size_t rounds)
 		t.join();
 	}
 
-	cout << "%u个线程并发执行" << nworks << "轮次，每轮次malloc" << rounds << "次,malloc rounds" << ntimes << "次 : 花费： " << malloc_costtime << endl;
+	cout << nworks << "个线程并发执行" << rounds << "轮次，每轮次ConcurrentAlloc " << ntimes << "次, 花费： " << malloc_costtime << "ms" << endl;
+	cout << nworks << "个线程并发执行" << rounds << "轮次，每轮次ConcurrentFree " << ntimes << "次, 花费： " << free_costtime << "ms" << endl;
+	cout << nworks << "个线程并发执行" << rounds << "轮次，每轮次ConcurrentAlloc和ConcurrentFree " << ntimes << "次, 花费： " << malloc_costtime + free_costtime << "ms" << endl;
 
 	cout << "%u个线程并发执行" << nworks << "轮次，每轮次free" << rounds << "次,malloc rounds" << ntimes << "次 : 花费： " << free_costtime << endl;
 }
@@ -101,10 +105,10 @@ int main()
 {
 	size_t n = 10000;
 	cout << "==========================================================" << endl;
-	BenchmarkConcurrentMalloc(n, 4, 10);
+	BenchmarkConcurrentMalloc(n, 6, 10);
 	cout << endl << endl;
 
-	BenchmarkMalloc(n, 4, 10);
+	BenchmarkMalloc(n, 6, 10);
 	cout << "==========================================================" << endl;
 
 	return 0;

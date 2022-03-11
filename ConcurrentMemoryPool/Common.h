@@ -7,7 +7,8 @@
 #include<thread>
 #include<algorithm>
 #include<unordered_map>
-#include <atomic>
+#include<atomic>
+#include<cstring>
 using std::cout;
 using std::endl;
 
